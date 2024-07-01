@@ -1,13 +1,13 @@
-// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using System.Runtime.CompilerServices;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    [SerializeField] private float _speed = 100.0f;
+    [SerializeField] private float _speed = 200.0f;
     private Vector2 _direction;
 
 
@@ -20,7 +20,7 @@ public class Ball : MonoBehaviour
 
     void AddStartingForce()
     {
-        float x = UnityEngine.Random.Range(-1.0f, 1.0f);
+        float x = UnityEngine.Random.Range(-0.5f, .5f);
         float y = UnityEngine.Random.value;
         _direction.x = x;
         _direction.y = y;
@@ -33,4 +33,6 @@ public class Ball : MonoBehaviour
     {
         
     }
+
+    
 }
