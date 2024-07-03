@@ -20,18 +20,24 @@ public class Ball : MonoBehaviour
 
     void AddStartingForce()
     {
-        float x = UnityEngine.Random.Range(-0.5f, .5f);
-        float y = UnityEngine.Random.value;
+        float x = UnityEngine.Random.Range(-0.2f, 0.2f);
         _direction.x = x;
-        _direction.y = y;
-        // Debug.Log($"x = {x}, y = {y}");
+        _direction.y = -1;
         _rb.AddForce(_direction * _speed);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // cap ball speed
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) 
+    {
+        if (collision.gameObject.CompareTag("Brick")) 
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     
