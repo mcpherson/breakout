@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] private float _speed = 200.0f;
     private Vector2 _direction;
+    float _maxVelocity = 5f;
 
 
     // Start is called before the first frame update
@@ -30,6 +31,10 @@ public class Ball : MonoBehaviour
     void Update()
     {
         // cap ball speed
+        if (_rb.velocity.magnitude > _maxVelocity)
+        {
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxVelocity);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision) 
