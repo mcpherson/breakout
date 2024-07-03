@@ -6,7 +6,7 @@ using UnityEngine.U2D;
 public class Paddle : MonoBehaviour
 {
 
-    [SerializeField] private float _speed = 20.0f;
+    [SerializeField] private float _speed = 30.0f;
 
     private Rigidbody2D _rb;
     private Vector2 _direction;
