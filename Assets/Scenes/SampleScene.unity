@@ -318,8 +318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cdc939e383e8248ac2ef8ab7d0a1eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelSize: {x: 16, y: 5}
-  _brickOffset: {x: 1, y: 0.5}
   _brickPrefab: {fileID: 8256002521395030585, guid: 7e5f6a74856a0604d8e24025ab3d1c63, type: 3}
 --- !u!4 &1238570890
 Transform:
@@ -330,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 1238570888}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

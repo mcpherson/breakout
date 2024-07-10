@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    [SerializeField] Vector2Int _levelSize;
-    [SerializeField] Vector2 _brickOffset;
+    Vector2Int _levelSize = new Vector2Int(8, 4); // num rows+cols, 2x1 grid size
+    Vector2 _levelOffset = new Vector2(-7f, 1.25f);
+    Vector2 _brickOffset = new Vector2(2, 1);
     [SerializeField] GameObject _brickPrefab;
 
     void Awake()
@@ -14,9 +16,12 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < _levelSize.y; j++)
             {
-                GameObject newBrick = Instantiate(_brickPrefab, transform);
-                // https://youtu.be/jyXZ3RVe5as?t=1019
-                newBrick.transform.position = transform.position + new Vector3((float)((_levelSize.x-1) * 0.5f - i) * _brickOffset.x, j * _brickOffset.y, 0);
+                GameObject newBrick = Instantiate(_brickPrefab, new Vector3(
+                    (i * _brickOffset.x) + _levelOffset.x, 
+                    (j * _brickOffset.y) + _levelOffset.y, 
+                    0), 
+                    _brickPrefab.transform.rotation
+                );
             }
         }
     }
