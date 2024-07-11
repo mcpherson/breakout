@@ -27,7 +27,9 @@ public class Ball : MonoBehaviour
     int _lives = 3;
     [SerializeField] GameObject[] _livesDisplay;
 
-    // GAME OVER
+    // WIN / LOSE
+    int _brickCount;
+    [SerializeField] GameObject _youWinPanel;
     [SerializeField] GameObject _gameOverPanel;
 
 
@@ -43,6 +45,8 @@ public class Ball : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _brickCount = GameObject.FindGameObjectsWithTag("Brick").Length;
+        // _brickCount = FindObjectOfType<LevelGenerator>().transform.childCount;
         AddStartingForce();
     }
 
@@ -114,6 +118,14 @@ public class Ball : MonoBehaviour
             _timeSinceLastBreak = 0;
             _scoreText.text = Mathf.Round(_score).ToString();
             Destroy(collision.gameObject);
+            
+            _brickCount--;
+            // win condition
+            if (_brickCount <= 0)
+            {
+                _youWinPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
         }
     }
 
