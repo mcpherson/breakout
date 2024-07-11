@@ -16,13 +16,19 @@ public class Ball : MonoBehaviour
     float _maxVelocity = 8f;
     float _minVelocity = 4f;
 
-    // HUD
+    // SCORE
     float _score = 0;
     float _baseScore = 100;
-    int _lives = 5;
     [SerializeField] TextMeshProUGUI _scoreText;
     float _timeSinceLastBreak = 0f;
     float _maxTimeSinceLastBreak = 2f;
+
+    // LIVES
+    int _lives = 3;
+    [SerializeField] GameObject[] _livesDisplay;
+
+    // GAME OVER
+    [SerializeField] GameObject _gameOverPanel;
 
 
     void AddStartingForce()
@@ -62,10 +68,21 @@ public class Ball : MonoBehaviour
         if (transform.position.y < _minY)
         {
             _lives--;
-            transform.position = Vector3.zero;
-            // nudge the ball downward to prevent soft-lock conditions
-            _rb.velocity = new Vector2(0.0f, -0.01f);
-            AddStartingForce();
+
+            if (_lives <= 0)
+            {
+                _livesDisplay[_lives].SetActive(false);
+                GameOver();
+            }
+            else 
+            {
+                _livesDisplay[_lives].SetActive(false);
+
+                transform.position = Vector3.zero;
+                // nudge the ball downward to prevent soft-lock conditions
+                _rb.velocity = new Vector2(0.0f, -0.01f);
+                AddStartingForce();
+            }
         }
 
         // handle flat trajectory (soft-lock prevention, maybe clamping can be used here instead?)
@@ -100,7 +117,15 @@ public class Ball : MonoBehaviour
         }
     }
 
+    void GameOver()
+    {
+        Destroy(gameObject);
+        Debug.Log("GAME OVER");
+        _gameOverPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+
     
 }
 
-// TODO: new game/pause menus, score flashes @ brick position when brick breaks, game modes, sliders, control mapping
+// TODO: pause menu, score flashes @ brick position when brick breaks, game modes, sliders, control mapping, high score storage
